@@ -12,7 +12,7 @@ class BookShelves extends Component {
             currentlyReading: [],
             wantToRead: [],
             read: [],
-            loading: true
+            loading: true,
         }
     }
 
@@ -28,7 +28,7 @@ class BookShelves extends Component {
         this.setState({loading: true})
         // more information on this call inside update
         this.clearBooks();
-        getAll()
+            getAll()
             .then(res => {
                 console.log(res);
                 res.forEach(book => {
