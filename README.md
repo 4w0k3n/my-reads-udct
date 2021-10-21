@@ -1,11 +1,11 @@
 #Udacity React Nanodegree Project 1
 
-##How to Run local DE: 
+## How to Run local DE: 
 
-###$ npm install
-###$ npm run start
+### $ npm install
+### $ npm run start
 
-##Dependencies
+## Dependencies
 - "bootstrap": "^5.1.3"
 - "react": "^17.0.2"
 - "react-bootstrap": "^2.0.0"
