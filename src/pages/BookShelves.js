@@ -1,5 +1,5 @@
 import  {Component} from "react";
-import Shelve from "../components/Shelve";
+import Shelf from "../components/Shelf";
 import {Row, Spinner} from "react-bootstrap";
 import {BsCheckSquareFill, GiRead, IoCalendar} from "react-icons/all";
 
@@ -18,10 +18,10 @@ class BookShelves extends Component {
                     </Row>
                     :
                     <Row className="justify-content-md-center">
-                        <Shelve name='Currently Reading' data={this.props.currentlyReading} icon = {<GiRead/>}
-                                updateBook={this.props.updateBook}/>
-                        <Shelve name='Want to Read' data={this.props.wantToRead} updateBook={this.props.updateBook} icon = {<IoCalendar/>}/>
-                        <Shelve name='Read / Finished' data={this.props.read} updateBook={this.props.updateBook} icon = {<BsCheckSquareFill/>}/>
+                        <Shelf name='Currently Reading' data={this.props.currentlyReading} icon = {<GiRead/>}
+                               updateBook={this.props.updateBook}/>
+                        <Shelf name='Want to Read' data={this.props.wantToRead} updateBook={this.props.updateBook} icon = {<IoCalendar/>}/>
+                        <Shelf name='Read / Finished' data={this.props.read} updateBook={this.props.updateBook} icon = {<BsCheckSquareFill/>}/>
                     </Row>
 
                 }

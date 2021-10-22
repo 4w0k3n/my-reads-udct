@@ -1,7 +1,7 @@
 import {Badge, Col, Container, Row} from "react-bootstrap";
 import BookCard from "./BookCard";
 
-function Shelve(props) {
+function Shelf(props) {
     return (
         <Container fluid={true}>
             <Row>
@@ -18,4 +18,4 @@ function Shelve(props) {
     );
 }
 
-export default Shelve;
+export default Shelf;
