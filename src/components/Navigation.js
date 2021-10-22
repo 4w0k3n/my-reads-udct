@@ -1,4 +1,3 @@
-import react, {Component} from "react";
 import {Link} from "react-router-dom";
 import {Nav, Navbar} from "react-bootstrap";
 import {BsBookshelf, BsSearch, ImBooks} from "react-icons/all";

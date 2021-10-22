@@ -1,6 +1,7 @@
-import react, {Component} from "react";
+import {Component} from "react";
 import {Badge, Col, Container, Form, Row} from "react-bootstrap";
 import {BsSearch} from "react-icons/all";
+
 
 class SearchBar extends Component {
 
@@ -8,39 +9,44 @@ class SearchBar extends Component {
         super(props);
         this.state = {
             searchQuery: '',
-            smallInput: false
+            typingTimeout: 0,
         }
     }
 
-    handleInput = (e, query) => {
-        e.preventDefault();
-        // Using Callback to get sycronous behaviour for setState in order to be able to use controlled Form
+    handleInput = (query) => {
+
+        if (this.state.typingTimeout) {
+            clearTimeout(this.state.typingTimeout);
+        }
+
+        // callback Hell LoL
         this.setState({searchQuery: query}, () => {
-            console.log(this.state.searchQuery);
-            // preventing async fails when deleting input with return button beacuse API causes async fails for onChange invokation..
-            if (this.state.searchQuery.length <= 2) {
-                this.props.searchBooks('');
-                this.setState({smallInput: true});
-            } else {
-                this.setState({smallInput: false});
-                this.props.searchBooks(this.state.searchQuery);
+            this.setState({
+                typingTimeout: setTimeout(() => {
+                    this.props.searchBooks(this.state.searchQuery);
+                }, 2000)
+            });
+        });
+    }
+
+    disableEnterKey = (e) => {
+        if (e.keyIdentifier === 'U+000A' || e.keyIdentifier === 'Enter' || e.keyCode === 13) {
+            if (e.target.nodeName === 'INPUT' && e.target.type === 'text') {
+                e.preventDefault();
+                return false;
             }
-
-        })
-
+        }
     }
 
     componentDidMount() {
         //disable enter key in this component, source: https://stackoverflow.com/questions/5629805/disabling-enter-key-for-form
-        window.addEventListener('keydown', function (e) {
-            if (e.keyIdentifier == 'U+000A' || e.keyIdentifier == 'Enter' || e.keyCode == 13) {
-                if (e.target.nodeName == 'INPUT' && e.target.type == 'text') {
-                    e.preventDefault();
-                    return false;
-                }
-            }
-        }, true);
+        window.addEventListener('keydown', this.disableEnterKey, true);
     }
+
+    componentWillUnmount() {
+        window.removeEventListener('keydown', this.disableEnterKey);
+    }
+
 
     render() {
         return (
@@ -52,15 +58,11 @@ class SearchBar extends Component {
                     </Col>
                 </Row>
                 <Row>
-                    {(this.state.searchQuery.length <= 2 && this.state.searchQuery.length !== 0) &&
-                    <span className='alert alert-danger small'>Please enter at least 2 characters.</span>
-                    }
-                </Row>
-                <Row>
-                    <Form onSubmit={false}>
-                        <Form.Control style={{margin: 10}} size="lg" type="text" placeholder="Enter your search term"
-                                      value={this.state.searchQuery} on onChange={(e) => {
-                            this.handleInput(e, e.target.value)
+                    <Form>
+                        <Form.Control style={{margin: 10}} size="lg" type="text"
+                                      placeholder="Enter your search term"
+                                      value={this.state.searchQuery} onChange={(e) => {
+                            this.handleInput(e.target.value)
                         }}/>
                     </Form>
                 </Row>

@@ -1,5 +1,4 @@
-import react, {Component} from "react";
-import {ButtonGroup, Card, DropdownButton, Dropdown, Container, Row, Col, Button} from "react-bootstrap";
+import {Card, Dropdown, Container, Row, Col, Button} from "react-bootstrap";
 import {BsArrowReturnRight, FcGoogle, GiPencil} from "react-icons/all";
 
 function BookCard(props) {
@@ -11,8 +10,8 @@ function BookCard(props) {
                 <Card.Body>
                     <Card.Title>{props.book.title}</Card.Title>
                     <Card.Text>
-                        {props.book.authors.map(author => (
-                            <span className='text-muted' style={{fontSize: 13}}><GiPencil
+                        {props.book.authors.map((author, index) => (
+                            <span key={index} className='text-muted' style={{fontSize: 13}}><GiPencil
                                 style={{marginLeft: 6, marginRight: 3}}/>{author}</span>
                         ))}
                     </Card.Text>

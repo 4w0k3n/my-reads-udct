@@ -1,7 +1,5 @@
-import react, {Component} from "react";
-import {Badge, Card, Col, Container, Row} from "react-bootstrap";
+import {Badge, Col, Container, Row} from "react-bootstrap";
 import BookCard from "./BookCard";
-import {GiRead} from "react-icons/all";
 
 function Shelve(props)
 {
@@ -13,8 +11,8 @@ function Shelve(props)
                 </Col>
             </Row>
             <Row className='justify-content-md-center'>
-                {props.data.map(book => (
-                    <Col md="auto" style={{margin: 10}}>
+                {props.data.map((book, index) => (
+                    <Col md="auto" style={{margin: 10}} key={index}>
                         {<BookCard book={book} updateBook={props.updateBook}/>}
                     </Col>
                 ))}
