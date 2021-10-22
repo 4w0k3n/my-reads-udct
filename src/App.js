@@ -4,7 +4,7 @@ import {BrowserRouter as Router, Route} from "react-router-dom";
 import BookShelves from "./pages/BookShelves";
 import Navigation from "./components/Navigation";
 import BookSearch from "./pages/BookSearch";
-import {getAll, update} from "./api/BooksAPI";
+import {getAll, search, update} from "./api/BooksAPI";
 
 
 class App extends Component {
@@ -15,7 +15,11 @@ class App extends Component {
             currentlyReading: [],
             wantToRead: [],
             read: [],
-            loadingBooks: false
+            loadingBooks: false,
+            searchResult: [],
+            noResults: false,
+            loadingSearch: false,
+            oldSearch: ''
         }
     }
 
@@ -56,7 +60,7 @@ class App extends Component {
             })
     }
 
-    updateBook = (book, shelf) => {
+    updateBook = (book, shelf, oldSearch) => {
         update(book, shelf)
             .then(res => {
                 /**I'll let the API do the work for me instead of handling the state manually..
@@ -67,6 +71,29 @@ class App extends Component {
                  * TLDR: The response of getBooks() handles the state*/
                 this.getBooks();
             });
+    }
+
+    searchBooks = (query) => {
+        this.setState(() => ({
+            loadingSearch: true, oldSearch: query
+        }));
+        if (!query || query === '') {
+            this.setState(() => ({
+                searchResult: [], noResults: false, loadingSearch: false
+            }));
+        } else {
+            search(query)
+                .then(res => {
+                    if (res.hasOwnProperty('error')) {
+                        this.setState(() => ({searchResult: [], noResults: true, loadingSearch: false}));
+                    } else {
+                        this.setState(() => ({searchResult: res, noResults: false, loadingSearch: false}));
+                    }
+                })
+                .catch(e => {
+                    this.setState(() => ({searchResult: [], noResults: true, loadingSearch: false}));
+                })
+        }
     }
 
 
@@ -81,7 +108,6 @@ class App extends Component {
                             wantToRead = {this.state.wantToRead}
                             read = {this.state.read}
                             loadingBooks = {this.state.loadingBooks}
-                            clearBooks = {this.clearBooks}
                             getBooks = {this.getBooks}
                             updateBook = {this.updateBook}
                         />
@@ -92,9 +118,13 @@ class App extends Component {
                             wantToRead = {this.state.wantToRead}
                             read = {this.state.read}
                             loadingBooks = {this.state.loadingBooks}
-                            clearBooks = {this.clearBooks}
+                            oldSearch = {this.state.oldSearch}
+                            searchResult = {this.state.searchResult}
+                            noResults= {this.state.noResults}
+                            loading = {this.state.loadingSearch}
                             getBooks = {this.getBooks}
                             updateBook = {this.updateBook}
+                            searchBooks = {this.searchBooks}
                         />
                     )}/>
                 </Router>

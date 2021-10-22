@@ -41,6 +41,7 @@ class SearchBar extends Component {
     componentDidMount() {
         //disable enter key in this component, source: https://stackoverflow.com/questions/5629805/disabling-enter-key-for-form
         window.addEventListener('keydown', this.disableEnterKey, true);
+        this.setState({searchQuery: this.props.oldSearch})
     }
 
     componentWillUnmount() {
@@ -53,14 +54,14 @@ class SearchBar extends Component {
             <Container>
                 <Row className='justify-content-md-center d-flex flex-fill'>
                     <Col md="auto">
-                        <Badge bg="secondary" style={{margin: 10, fontSize: 34}}><BsSearch/> Search for some new
+                        <Badge bg="secondary" style={{margin: 10, fontSize: 34}}><BsSearch/> Search for new
                             books</Badge>
                     </Col>
                 </Row>
-                <Row>
+                <Row className='justify-content-md-center d-flex flex-fill'>
                     <Form>
-                        <Form.Control style={{margin: 10}} size="lg" type="text"
-                                      placeholder="Enter your search term"
+                        <Form.Control style={{marginBottom: 10}} size="lg" type="text"
+                                      placeholder="Search for Books, Authors, ..."
                                       value={this.state.searchQuery} onChange={(e) => {
                             this.handleInput(e.target.value)
                         }}/>

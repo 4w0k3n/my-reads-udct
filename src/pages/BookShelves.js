@@ -11,7 +11,7 @@ class BookShelves extends Component {
 
     render() {
         return (
-            <Container>
+            <div>
                 {this.props.loadingBooks ?
                     <Row className="justify-content-md-center">
                         <Spinner animation="border"/>
@@ -25,7 +25,7 @@ class BookShelves extends Component {
                     </Row>
 
                 }
-            </Container>
+            </div>
         );
     }
 }
