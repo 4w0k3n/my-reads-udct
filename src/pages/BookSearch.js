@@ -32,6 +32,7 @@ class BookSearch extends Component {
                             read = {this.props.read}
                             noResults = {this.props.noResults}
                             allBooks = {this.props.allBooks}
+                            checkIfInShelf = {this.props.checkIfInShelf}
                         />
                     </div>
                 }
