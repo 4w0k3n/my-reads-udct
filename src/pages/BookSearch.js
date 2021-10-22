@@ -31,6 +31,7 @@ class BookSearch extends Component {
                             wantToRead = {this.props.wantToRead}
                             read = {this.props.read}
                             noResults = {this.props.noResults}
+                            allBooks = {this.props.allBooks}
                         />
                     </div>
                 }

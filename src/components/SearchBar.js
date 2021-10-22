@@ -29,6 +29,7 @@ class SearchBar extends Component {
         });
     }
 
+    //disable enter key in this component, source: https://stackoverflow.com/questions/5629805/disabling-enter-key-for-form
     disableEnterKey = (e) => {
         if (e.keyIdentifier === 'U+000A' || e.keyIdentifier === 'Enter' || e.keyCode === 13) {
             if (e.target.nodeName === 'INPUT' && e.target.type === 'text') {
@@ -39,7 +40,6 @@ class SearchBar extends Component {
     }
 
     componentDidMount() {
-        //disable enter key in this component, source: https://stackoverflow.com/questions/5629805/disabling-enter-key-for-form
         window.addEventListener('keydown', this.disableEnterKey, true);
         this.setState({searchQuery: this.props.oldSearch})
     }

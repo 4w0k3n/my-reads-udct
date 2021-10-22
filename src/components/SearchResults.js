@@ -3,6 +3,7 @@ import {BsThreeDotsVertical, GiPencil} from "react-icons/all";
 
 function SearchResults(props) {
 
+
     const checkIfInShelf = (result, shelf) => {
         let inShelf = false;
         shelf.forEach(book => {
@@ -56,7 +57,7 @@ function SearchResults(props) {
                                             }} active>Currently Reading</Dropdown.Item>
                                             :
                                             <Dropdown.Item onClick={() => {
-                                                props.updateBook(result, 'currentlyReading')
+                                                props.updateBook(result, 'currentlyReading');
                                             }}>Currently Reading</Dropdown.Item>}
 
                                         {checkIfInShelf(result, props.wantToRead) ?

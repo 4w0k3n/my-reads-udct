@@ -12,6 +12,7 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            allBooks: [],
             currentlyReading: [],
             wantToRead: [],
             read: [],
@@ -31,29 +32,36 @@ class App extends Component {
         })
     }
 
+    shelfBooks = (books) => {
+        this.clearBooks();
+        books.forEach(book => {
+            if (book.shelf === 'currentlyReading') {
+                this.setState(oldState => ({
+                    currentlyReading: [...oldState.currentlyReading, book]
+                }));
+            }
+            if (book.shelf === 'wantToRead') {
+                this.setState(oldState => ({
+                    wantToRead: [...oldState.wantToRead, book]
+                }));
+            }
+            if (book.shelf === 'read') {
+                this.setState(oldState => ({
+                    read: [...oldState.read, book]
+                }));
+            }
+        })
+    }
+
     getBooks = () => {
         this.setState({loadingBooks: true});
         this.clearBooks(); // more information on this call inside update
         getAll()
             .then(res => {
-                res.forEach(book => {
-                    if (book.shelf === 'currentlyReading') {
-                        this.setState(oldState => ({
-                            currentlyReading: [...oldState.currentlyReading, book]
-                        }));
-                    }
-                    if (book.shelf === 'wantToRead') {
-                        this.setState(oldState => ({
-                            wantToRead: [...oldState.wantToRead, book]
-                        }));
-                    }
-                    if (book.shelf === 'read') {
-                        this.setState(oldState => ({
-                            read: [...oldState.read, book]
-                        }));
-                    }
+                this.setState({allBooks: res}, ()=>{
+                    this.shelfBooks(this.state.allBooks);
+                    this.setState({loadingBooks: false});
                 })
-                this.setState({loadingBooks: false});
             })
             .catch(err => {
                 console.log(err);
@@ -69,7 +77,14 @@ class App extends Component {
                  * If the API call fails for whatever reason and I update the state anyway, API and State are not in Sync.
                  *
                  * TLDR: The response of getBooks() handles the state*/
-                this.getBooks();
+                //this.getBooks();
+                let allMyBooks = this.state.allBooks;
+                allMyBooks.forEach(obj => {
+                    if (book.id === obj.id){
+                        obj.shelf = shelf;
+                    }
+                })
+                this.shelfBooks(allMyBooks);
             });
     }
 
@@ -115,6 +130,7 @@ class App extends Component {
                     <Route exact path='/search' render={() => (
                         <BookSearch
                             currentlyReading={ this.state.currentlyReading}
+                            allBooks = {this.state.allBooks}
                             wantToRead = {this.state.wantToRead}
                             read = {this.state.read}
                             loadingBooks = {this.state.loadingBooks}
