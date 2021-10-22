@@ -2,7 +2,7 @@ import {Container, Dropdown, Figure, ListGroup, Row} from "react-bootstrap";
 import {BsThreeDotsVertical, GiPencil} from "react-icons/all";
 
 function SearchResults(props) {
-    console.log(props.noResults);
+
     const checkIfInShelf = (result, shelf) => {
         let inShelf = false;
         shelf.forEach(book => {
@@ -56,7 +56,7 @@ function SearchResults(props) {
                                             }} active>Currently Reading</Dropdown.Item>
                                             :
                                             <Dropdown.Item onClick={() => {
-                                                props.updateBook(result, 'currentlyReading', this.props.sea)
+                                                props.updateBook(result, 'currentlyReading')
                                             }}>Currently Reading</Dropdown.Item>}
 
                                         {checkIfInShelf(result, props.wantToRead) ?

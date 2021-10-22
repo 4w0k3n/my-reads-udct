@@ -5,10 +5,10 @@ function BookCard(props) {
 
     return (
         <div>
-            <Card style={{width: '18rem', height: '35rem'}}>
+            <Card style={{width: '18rem', height: '40rem'}}>
                 <Card.Img variant="top" src={props.book.imageLinks.thumbnail} style={{height: 400}}/>
                 <Card.Body>
-                    <Card.Title>{props.book.title}</Card.Title>
+                    <Card.Title><span style={{fontSize: 15}}>{props.book.title}</span></Card.Title>
                     <Card.Text>
                         {props.book.authors.map((author, index) => (
                             <span key={index} className='text-muted' style={{fontSize: 13}}><GiPencil
