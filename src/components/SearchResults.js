@@ -1,5 +1,5 @@
-import {Container, Dropdown, Figure, ListGroup, Row} from "react-bootstrap";
-import {BsThreeDotsVertical, GiPencil} from "react-icons/all";
+import {Container, Dropdown, Figure, ListGroup, Row} from 'react-bootstrap';
+import {BsThreeDotsVertical, GiPencil} from 'react-icons/all';
 
 function SearchResults(props) {
 
@@ -11,11 +11,11 @@ function SearchResults(props) {
                 </Row>
                 :
                 <Row className='justify-content-md-center d-flex flex-fill'>
-                    <ListGroup as="ul" numbered>
+                    <ListGroup as='ul' numbered>
                         {props.searchResult.map((result, index) => (
                             (result.hasOwnProperty('authors')) &&
-                            <ListGroup.Item key={index} as="li"
-                                            className="d-flex justify-content-between align-items-start">
+                            <ListGroup.Item key={index} as='li'
+                                            className='d-flex justify-content-between align-items-start'>
                                 <div>
                                     <Figure>
                                         <Figure.Image
@@ -25,8 +25,8 @@ function SearchResults(props) {
                                         />
                                     </Figure>
                                 </div>
-                                <div className="ms-2 me-auto">
-                                    <div className="fw-bold">{result.title}</div>
+                                <div className='ms-2 me-auto'>
+                                    <div className='fw-bold'>{result.title}</div>
                                     {
                                         result.authors.map((author, i) => (
                                             <span key={i} className='text-muted' style={{fontSize: 13}}>
@@ -34,7 +34,7 @@ function SearchResults(props) {
                                     }
                                 </div>
                                 <Dropdown>
-                                    <Dropdown.Toggle variant="outline-dark" id="dropdown-basic" size='sm'>
+                                    <Dropdown.Toggle variant='outline-dark' id='dropdown-basic' size='sm'>
                                         <BsThreeDotsVertical/>
                                     </Dropdown.Toggle>
                                     <Dropdown.Menu>
@@ -51,7 +51,7 @@ function SearchResults(props) {
                                             }} active>Want to read</Dropdown.Item>
                                             :
                                             <Dropdown.Item onClick={() => {
-                                                props.updateBook(result, 'wantToRead')
+                                                props.updateBook(result, 'wantToRead');
                                             }}>Want to read</Dropdown.Item>}
 
                                         {props.checkIfInShelf(result, props.read) ?
@@ -59,7 +59,7 @@ function SearchResults(props) {
                                             }} active>Read/Finished</Dropdown.Item>
                                             :
                                             <Dropdown.Item onClick={() => {
-                                                props.updateBook(result, 'read')
+                                                props.updateBook(result, 'read');
                                             }}>Read/Finished</Dropdown.Item>}
                                         {!props.checkIfInShelf(result, props.read) && !props.checkIfInShelf(result, props.wantToRead) && !props.checkIfInShelf(result, props.currentlyReading) ?
                                             <Dropdown.Item onClick={() => {

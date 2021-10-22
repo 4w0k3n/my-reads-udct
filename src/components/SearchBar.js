@@ -1,6 +1,6 @@
-import {Component} from "react";
-import {Badge, Col, Container, Form, Row} from "react-bootstrap";
-import {BsSearch} from "react-icons/all";
+import {Component} from 'react';
+import {Badge, Col, Container, Form, Row} from 'react-bootstrap';
+import {BsSearch} from 'react-icons/all';
 
 
 class SearchBar extends Component {
@@ -10,7 +10,7 @@ class SearchBar extends Component {
         this.state = {
             searchQuery: '',
             typingTimeout: 0,
-        }
+        };
     }
 
     handleInput = (query) => {
@@ -27,7 +27,7 @@ class SearchBar extends Component {
                 }, 2000)
             });
         });
-    }
+    };
 
     //disable enter key in this component, source: https://stackoverflow.com/questions/5629805/disabling-enter-key-for-form
     disableEnterKey = (e) => {
@@ -37,11 +37,11 @@ class SearchBar extends Component {
                 return false;
             }
         }
-    }
+    };
 
     componentDidMount() {
         window.addEventListener('keydown', this.disableEnterKey, true);
-        this.setState({searchQuery: this.props.oldSearch})
+        this.setState({searchQuery: this.props.oldSearch});
     }
 
     componentWillUnmount() {
@@ -53,17 +53,17 @@ class SearchBar extends Component {
         return (
             <Container>
                 <Row className='justify-content-md-center d-flex flex-fill'>
-                    <Col md="auto">
-                        <Badge bg="secondary" style={{margin: 10, fontSize: 34}}><BsSearch/> Search for new
+                    <Col md='auto'>
+                        <Badge bg='secondary' style={{margin: 10, fontSize: 34}}><BsSearch/> Search for new
                             books</Badge>
                     </Col>
                 </Row>
                 <Row className='justify-content-md-center d-flex flex-fill'>
                     <Form>
-                        <Form.Control style={{marginBottom: 10}} size="lg" type="text"
-                                      placeholder="Search for Books, Authors, ..."
+                        <Form.Control style={{marginBottom: 10}} size='lg' type='text'
+                                      placeholder='Search for Books, Authors, ...'
                                       value={this.state.searchQuery} onChange={(e) => {
-                            this.handleInput(e.target.value)
+                            this.handleInput(e.target.value);
                         }}/>
                     </Form>
                 </Row>

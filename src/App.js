@@ -1,10 +1,10 @@
 import './App.css';
-import {Component} from "react";
-import {BrowserRouter as Router, Route} from "react-router-dom";
-import BookShelves from "./pages/BookShelves";
-import Navigation from "./components/Navigation";
-import BookSearch from "./pages/BookSearch";
-import {get, getAll, search, update} from "./api/BooksAPI";
+import {Component} from 'react';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
+import BookShelves from './pages/BookShelves';
+import Navigation from './components/Navigation';
+import BookSearch from './pages/BookSearch';
+import {get, getAll, search, update} from './api/BooksAPI';
 
 
 class App extends Component {
@@ -21,7 +21,7 @@ class App extends Component {
             noResults: false,
             loadingSearch: false,
             oldSearch: ''
-        }
+        };
     }
 
     clearShelves = () => {
@@ -29,8 +29,8 @@ class App extends Component {
             currentlyReading: [],
             wantToRead: [],
             read: []
-        })
-    }
+        });
+    };
 
     shelfBooks = (books) => {
         this.clearShelves();
@@ -50,8 +50,8 @@ class App extends Component {
                     read: [...oldState.read, book]
                 }));
             }
-        })
-    }
+        });
+    };
 
     getBooks = () => {
         this.setState({loadingBooks: true});
@@ -61,12 +61,12 @@ class App extends Component {
                 this.setState({allBooks: res}, () => {
                     this.shelfBooks(this.state.allBooks);
                     this.setState({loadingBooks: false});
-                })
+                });
             })
             .catch(err => {
                 console.log(err);
             });
-    }
+    };
 
     updateBook = (book, shelf) => {
         update(book, shelf)
@@ -77,21 +77,21 @@ class App extends Component {
                     get(book.id).then(res => {
                         allMyBooks.push(res);
                         this.shelfBooks(allMyBooks);
-                    })
+                    });
                     // if book already in allBooks, just change shelf and update shelves
                 } else {
                     allMyBooks.forEach(obj => {
                         if (book.id === obj.id) {
                             obj.shelf = shelf;
                         }
-                    })
+                    });
                     this.shelfBooks(allMyBooks);
                 }
             })
             .catch(e => {
                 console.log(e);
             });
-    }
+    };
 
     searchBooks = (query) => {
         this.setState(() => ({
@@ -112,9 +112,9 @@ class App extends Component {
                 })
                 .catch(e => {
                     this.setState(() => ({searchResult: [], noResults: true, loadingSearch: false}));
-                })
+                });
         }
-    }
+    };
 
     checkIfInShelf = (obj, shelf) => {
         let inShelf = false;
@@ -122,17 +122,17 @@ class App extends Component {
             if (book.id === obj.id) {
                 inShelf = true;
             }
-        })
+        });
         return inShelf;
-    }
+    };
 
 
     render() {
         return (
             <div className="App">
                 <Router>
-                    <Route path='/' component={Navigation}/>
-                    <Route exact path='/' render={() => (
+                    <Route path="/" component={Navigation}/>
+                    <Route exact path="/" render={() => (
                         <BookShelves
                             currentlyReading={this.state.currentlyReading}
                             wantToRead={this.state.wantToRead}
@@ -142,10 +142,10 @@ class App extends Component {
                             updateBook={this.updateBook}
                         />
                     )}/>
-                    <Route exact path='/search' render={() => (
+                    <Route exact path="/search" render={() => (
                         <BookSearch
-                            currentlyReading={this.state.currentlyReading}
                             allBooks={this.state.allBooks}
+                            currentlyReading={this.state.currentlyReading}
                             wantToRead={this.state.wantToRead}
                             read={this.state.read}
                             loadingBooks={this.state.loadingBooks}
