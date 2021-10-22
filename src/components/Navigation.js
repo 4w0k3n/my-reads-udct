@@ -7,7 +7,7 @@ function Navigation() {
         <div>
             <Navbar sticky='top' bg="dark" variant="dark">
                 <Navbar.Brand as={Link} to='/' style={{marginLeft: 20}}> <ImBooks style={{marginRight: 5}}/> My
-                    Books</Navbar.Brand>
+                    Reads</Navbar.Brand>
                 <Nav className="me-auto">
                     <Nav.Link as={Link} to='/' style={{marginLeft: 20}}> <BsBookshelf style={{marginRight: 5}}/> Book
                         Shelves </Nav.Link>

@@ -1,6 +1,6 @@
 import  {Component} from "react";
 import SearchBar from "../components/SearchBar";
-import {Container, Row, Spinner} from "react-bootstrap";
+import {Row, Spinner} from "react-bootstrap";
 import SearchResults from "../components/SearchResults";
 
 

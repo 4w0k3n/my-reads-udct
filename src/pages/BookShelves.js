@@ -1,6 +1,6 @@
 import  {Component} from "react";
 import Shelve from "../components/Shelve";
-import {Container, Row, Spinner} from "react-bootstrap";
+import {Row, Spinner} from "react-bootstrap";
 import {BsCheckSquareFill, GiRead, IoCalendar} from "react-icons/all";
 
 class BookShelves extends Component {
