@@ -7,7 +7,8 @@ import SearchResults from '../components/SearchResults';
 class BookSearch extends Component {
 
     componentDidMount = () => {
-        this.props.getBooks(); //needs to get called here as well , if the user directly goes to /search without visiting
+        //needs to get called here as well , if the user directly goes to /search without visiting the main page
+        this.props.getBooks();
     };
 
     render() {

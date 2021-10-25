@@ -104,9 +104,9 @@ class App extends Component {
         } else {
             search(query)
                 .then(res => {
-                    if (res.hasOwnProperty('error')) {
+                    if (res.hasOwnProperty('error')) { // handles error, prints no Result Info
                         this.setState(() => ({searchResult: [], noResults: true, loadingSearch: false}));
-                    } else {
+                    } else {                              // has Results, sets them in the state, deletes no result Info
                         this.setState(() => ({searchResult: res, noResults: false, loadingSearch: false}));
                     }
                 })
