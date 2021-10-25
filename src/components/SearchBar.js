@@ -19,12 +19,12 @@ class SearchBar extends Component {
             clearTimeout(this.state.typingTimeout);
         }
 
-        // callback Hell LoL
+
         this.setState({searchQuery: query}, () => {
             this.setState({
                 typingTimeout: setTimeout(() => {
                     this.props.searchBooks(this.state.searchQuery);
-                }, 2000)
+                }, 800) // adjust Timeout here, if search is buggy when emptying the form, increase delay
             });
         });
     };

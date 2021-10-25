@@ -1,6 +1,12 @@
 # Udacity React Nanodegree Project 1
+# MyReads
+## Description
 
-## How to Run local DE: 
+MyReads is a Book Shelf APP for React Training, that lets you add and move Books to and though diffrent shelves.
+The three shelves respresent the state in that a book can have: have read, currently reading and want to read.
+To move a book around, simply use the control and pick a new spot. There is also a Search Page from where new books
+can be found and added to one of the shelves.
+## How to run local DEV Environment: 
 
 ### $ npm install
 ### $ npm run start
