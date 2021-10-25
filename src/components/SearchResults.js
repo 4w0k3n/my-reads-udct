@@ -1,5 +1,6 @@
 import {Container, Dropdown, Figure, ListGroup, Row} from 'react-bootstrap';
 import {BsThreeDotsVertical, GiPencil} from 'react-icons/all';
+import bookIcon from './../img/book.png'
 
 function SearchResults(props) {
 
@@ -13,24 +14,38 @@ function SearchResults(props) {
                 <Row className='justify-content-md-center d-flex flex-fill'>
                     <ListGroup as='ul' numbered>
                         {props.searchResult.map((result, index) => (
-                            (result.hasOwnProperty('authors')) &&
                             <ListGroup.Item key={index} as='li'
                                             className='d-flex justify-content-between align-items-start'>
-                                <div>
-                                    <Figure>
-                                        <Figure.Image
-                                            width={70}
-                                            height={90}
-                                            src={result.imageLinks.thumbnail}
-                                        />
-                                    </Figure>
-                                </div>
+                                {(result.hasOwnProperty('imageLinks') && result['imageLinks'].hasOwnProperty('thumbnail') ?
+                                    (<div>
+                                        <Figure>
+                                            <Figure.Image
+                                                width={70}
+                                                height={90}
+                                                src={result.imageLinks.thumbnail}
+                                            />
+                                        </Figure>
+                                    </div>)
+                                    :
+                                    (<div>
+                                        <Figure>
+                                            <Figure.Image
+                                                width={70}
+                                                height={120}
+                                                src={bookIcon}
+                                            />
+                                        </Figure>
+                                    </div>)
+                                )}
+
                                 <div className='ms-2 me-auto'>
                                     <div className='fw-bold'>{result.title}</div>
-                                    {
-                                        result.authors.map((author, i) => (
+                                    {(result.hasOwnProperty('authors')) ?
+                                        (result.authors.map((author, i) => (
                                             <span key={i} className='text-muted' style={{fontSize: 13}}>
-                                        <GiPencil style={{marginLeft: 6, marginRight: 3}}/>{author}</span>))
+                                        <GiPencil style={{marginLeft: 6, marginRight: 3}}/>{author}</span>)))
+                                        :
+                                        (<span className='text-muted' style={{fontSize: 13}}>No known authors</span>)
                                     }
                                 </div>
                                 <Dropdown>

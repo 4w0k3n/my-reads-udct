@@ -1,19 +1,35 @@
 import {Card, Dropdown, Container, Row, Col, Button} from 'react-bootstrap';
 import {BsArrowReturnRight, FcGoogle, GiPencil} from 'react-icons/all';
+import bookIcon from './../img/book.png';
 
 function BookCard(props) {
 
     return (
         <div>
             <Card style={{width: '18rem', height: '40rem'}}>
-                <Card.Img variant='top' src={props.book.imageLinks.thumbnail} style={{height: 400}}/>
+                {
+                    (props.book.hasOwnProperty('imageLinks') && props.book['imageLinks'].hasOwnProperty('thumbnail') ?
+                            (<Card.Img variant='top' src={props.book.imageLinks.thumbnail} style={{height: 400}}/>)
+                            :
+                            (<Card.Img variant='top' src={bookIcon} style={{height: 400}}/>)
+                    )
+                }
                 <Card.Body>
                     <Card.Title><span style={{fontSize: 15}}>{props.book.title}</span></Card.Title>
                     <Card.Text>
-                        {props.book.authors.map((author, index) => (
-                            <span key={index} className='text-muted' style={{fontSize: 13}}><GiPencil
-                                style={{marginLeft: 6, marginRight: 3}}/>{author}</span>
-                        ))}
+                        {
+                            props.book.hasOwnProperty('authors') ?
+                                (
+                                    props.book.authors.map((author, index) => (
+                                        <span key={index} className='text-muted' style={{fontSize: 13}}><GiPencil
+                                            style={{marginLeft: 6, marginRight: 3}}/>{author}</span>
+                                    ))
+                                )
+                                :
+                                (
+                                    <span className='text-muted' style={{fontSize: 13}}>No known authors</span>
+                                )
+                        }
                     </Card.Text>
                 </Card.Body>
                 <Card.Footer>
